@@ -1,0 +1,140 @@
+/* RESET CSS */
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+code,
+em,
+img,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+b,
+u,
+i,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+main,
+canvas,
+embed,
+footer,
+header,
+nav,
+section,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
+footer,
+header,
+nav,
+section,
+main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+/* FONTS */
+
+@font-face {
+  font-family: 'Orkney';
+  src: url('./fonts/orkney-bold.woff') format('woff');
+  src: url('./fonts/orkney-regular.woff') format('woff');
+  src: url('./fonts/orkney-medium.woff') format('woff');
+  src: url('./fonts/orkney-light.woff') format('woff');
+  font-weight: normal;
+}
+
+/* GLOBAL CSS */
+
+body {
+  background: #b8a8ff;
+  background: -moz-linear-gradient(
+    90deg,
+    #7ed8a7 0%,
+    #54dd6c 81%,
+    #008d2a 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    #7ed8a7 0%,
+    #54dd6c 81%,
+    #008d2a 100%
+  );
+  background: linear-gradient(90deg, #7ed8a7 0%, #54dd6c 81%, #008d2a 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7ed8a7",endColorstr="#008d2a",GradientType=1);
+}
