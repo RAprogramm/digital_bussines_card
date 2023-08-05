@@ -14,7 +14,8 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "core-js": "^3.6.5",
     "spectre.css": "^0.5.9",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-flip": "^3.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^5.0.8",
