@@ -1,35 +1,46 @@
-# Digital Business Card with Vue.js
+# Business Card
 
-A simple bilingual digital and mobile-first business card, made with Vue.js (3x) and Sass. All project (UI/UX) are made by me in Adobe Photoshop CC and you can see in Figma [clicking here](https://www.figma.com/file/tml1OvuApMRc0tJrgNfYrO/DIGITAL-BUSINESS-CARD?node-id=0%3A1) (not editable).
+### Sample Digital Business Card
 
-## Copy and Installation Tutorial
+You can check out a sample digital business card created with this project by visiting the [Digital Business Card Sample](https://digital-bussines-card.web.app/) website.
 
-Clone this repository using git clone
 
-```
-git clone https://github.com/RAprogramm/business-card.git
-```
 
-Npm install to install dependencies:
+## Version: 0.1.0
 
-```
-npm install
-```
+This is a private Vue.js project for creating a business card application.
 
-Compiles and hot-reloads for development
+## Scripts
 
-```
-npm run serve
-```
+You can run the following scripts using Vue CLI:
 
-### Compiles and minifies for production
+- `npm run serve`: Start the development server.
+- `npm run build`: Build the production-ready app.
+- `npm run lint`: Lint the project files.
 
-```
-npm run build
-```
+## Dependencies
 
-### Lints and fixes files
+The project uses the following dependencies:
 
-```
-npm run lint
-```
+- <code>@fortawesome/fontawesome-svg-core</code> (Version: ^1.3.0)
+- <code>@fortawesome/free-brands-svg-icons</code> (Version: ^6.0.0)
+- <code>@fortawesome/free-solid-svg-icons</code> (Version: ^6.0.0)
+- <code>@fortawesome/vue-fontawesome</code> (Version: ^3.0.0-5)
+- <code>core-js</code> (Version: ^3.6.5)
+- <code>spectre.css</code> (Version: ^0.5.9)
+- <code>vue</code> (Version: ^3.0.0)
+- <code>vue-flip</code> (Version: ^3.0.2)
+
+## Dev Dependencies
+
+The project also includes the following dev dependencies:
+
+- <code>@vue/cli-plugin-babel</code> (Version: ^5.0.8)
+- <code>@vue/cli-plugin-eslint</code> (Version: ^5.0.8)
+- <code>@vue/cli-service</code> (Version: ^5.0.8)
+- <code>@vue/compiler-sfc</code> (Version: ^3.0.0)
+- <code>babel-eslint</code> (Version: ^10.1.0)
+- <code>eslint</code> (Version: ^7.32.0)
+- <code>eslint-plugin-vue</code> (Version: ^7.0.0)
+
+
