@@ -1,28 +1,14 @@
 <template>
   <div class="body__profile__icons">
-    <a href="https://www.linkedin.com/in/andrei-rozanov-4271a425b/">
+    <a class="linkedin" href="https://www.linkedin.com/in/andrei-rozanov-4271a425b/">
       <fa :icon="['fab', 'linkedin']" />
     </a>
-    <a href="https://t.me/Magistr_RA">
+    <a class="telegram" href="https://t.me/Magistr_RA">
       <fa :icon="['fab', 'telegram']" />
     </a>
-    <a href="mailto:andrey.rozanov.vl@gmail.com">
+    <a class="google" href="mailto:andrey.rozanov.vl@gmail.com">
       <fa :icon="['fab', 'google']" />
     </a>
-    <!-- <div> -->
-    <!--   <script -->
-    <!--     src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js" -->
-    <!--   ></script> -->
-    <!--   <script -->
-    <!--   > -->
-    <!--     kofiWidgetOverlay.draw('rozanov', { -->
-    <!--       type: 'floating-chat', -->
-    <!--       'floating-chat.donateButton.text': 'Donate', -->
-    <!--       'floating-chat.donateButton.background-color': '#5cb85c', -->
-    <!--       'floating-chat.donateButton.text-color': '#fff' -->
-    <!--     }) -->
-    <!--   </script> -->
-    <!-- </div> -->
   </div>
 </template>
 
@@ -54,6 +40,15 @@
 
   .body__profile__icons a:hover {
     font-size: inherit;
-    color: #ddd;
+  }
+
+  .google:hover {
+    color: #ea4335;
+  }
+  .linkedin:hover {
+    color: #0077b5;
+  }
+  .telegram:hover {
+    color: #229ED9;
   }
 </style>

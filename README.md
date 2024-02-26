@@ -5,6 +5,7 @@
 You can check out a sample digital business card created with this project by visiting the [Digital Business Card Sample](https://digital-bussines-card.web.app/) website.
 
 
+<!-- TODO: add dynamic change colorscheme --> 
 
 ## Version: 0.1.0
 

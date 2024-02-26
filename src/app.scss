@@ -122,19 +122,5 @@ input {
 /* GLOBAL CSS */
 
 body {
-  background: #b8a8ff;
-  background: -moz-linear-gradient(
-    90deg,
-    #7ed8a7 0%,
-    #54dd6c 81%,
-    #008d2a 100%
-  );
-  background: -webkit-linear-gradient(
-    90deg,
-    #7ed8a7 0%,
-    #54dd6c 81%,
-    #008d2a 100%
-  );
-  background: linear-gradient(90deg, #7ed8a7 0%, #54dd6c 81%, #008d2a 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7ed8a7",endColorstr="#008d2a",GradientType=1);
+  background: linear-gradient(90deg, #abb3bf 0%, #5c6370 30%, #32363e 60%, #282c34 100%);
 }
