@@ -10,7 +10,7 @@
   export default {
     name: 'English',
     data: () => ({
-      bioEn: `Developer who works with many programming languages and learning something new every day.`
+      bioEn: `Multitasking developer and eternal seeker of knowledge.`
     })
   }
 </script>

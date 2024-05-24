@@ -12,7 +12,7 @@
   export default {
     name: 'Korean',
     data: () => ({
-      bioKr: `많은 프로그래밍 언어와 함께 일하며 매일 새로운 것을 배우는 개발자.`
+      bioKr: `다재다능한 개발자이자 지식의 영원한 탐구자.`
     })
   }
 </script>
