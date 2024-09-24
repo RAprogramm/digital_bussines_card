@@ -126,3 +126,51 @@
   color: #ffffff;
   font-weight: bold;
 }
+
+/* Анимация вращения */
+@keyframes rotate {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Плавное исчезновение */
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* Плавное появление */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.body__container.rotating {
+  animation: rotate 0.9s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.content-visible {
+  animation: fade-in 0.5s ease-in;
+  opacity: 1;
+}
+
+.content-hidden {
+  animation: fade-out 0.5s ease-out;
+  opacity: 0;
+}

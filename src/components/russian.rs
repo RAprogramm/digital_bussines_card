@@ -6,7 +6,7 @@ pub fn russian() -> Html {
 
     html! {
         <div class="body__profile__title">
-            <h1>{ "Андрей Розанов" }</h1>
+            <h1>{ "Андрей Ро́занов" }</h1>
             <h2>{ "Инженер-программист" }</h2>
             <div class="body__profile__bio-ru">
                 { bio_ru }

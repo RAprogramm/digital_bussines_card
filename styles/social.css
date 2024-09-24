@@ -32,18 +32,6 @@ a {
   transition: all 0.5s;
 }
 
-.google::after {
-  background-color: #ea4335;
-}
-
-.linkedin::after {
-  background-color: #0077b5;
-}
-
-.telegram::after {
-  background-color: #229ED9;
-}
-
 .google:hover::after,
 .linkedin:hover::after,
 .telegram:hover::after {
