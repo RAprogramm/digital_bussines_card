@@ -7,7 +7,7 @@ use app::App;
 
 // mod api;
 mod app;
-// mod components;
+mod components;
 // mod layouts;
 // mod pages;
 // mod router;
