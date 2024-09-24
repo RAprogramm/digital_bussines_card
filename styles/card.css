@@ -99,6 +99,17 @@
   border: 1px solid grey;
   padding: 1px;
   border-radius: 3px;
+  opacity: 0.5;
+  transition: opacity 0.3s, box-shadow 0.3s;
+}
+
+.flag:hover {
+  opacity: 1;
+}
+
+.active-flag {
+  opacity: 1;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
 }
 
 .body__profile__translate:hover button {
@@ -138,6 +149,49 @@
   }
 }
 
+/* @keyframes fade-out { */
+/*   from { */
+/*     opacity: 1; */
+/*   } */
+/**/
+/*   to { */
+/*     opacity: 0; */
+/*   } */
+/* } */
+/**/
+/* @keyframes fade-in { */
+/*   from { */
+/*     opacity: 0; */
+/*   } */
+/**/
+/*   to { */
+/*     opacity: 1; */
+/*   } */
+/* } */
+/**/
+/* .body__container.rotating { */
+/*   animation: rotate 0.9s ease-in-out; */
+/*   transform-style: preserve-3d; */
+/* } */
+/**/
+/* .content-visible { */
+/*   animation: fade-in 0.5s ease-in; */
+/*   opacity: 1; */
+/* } */
+/**/
+/* .content-hidden { */
+/*   animation: fade-out 0.5s ease-out; */
+/*   opacity: 0; */
+/* } */
+
+/* Вращение по оси Y с плавным переходом */
+
+.body__container {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  /* Плавное изменение вращения при свайпе */
+}
+
 /* Плавное исчезновение */
 @keyframes fade-out {
   from {
@@ -158,11 +212,6 @@
   to {
     opacity: 1;
   }
-}
-
-.body__container.rotating {
-  animation: rotate 0.9s ease-in-out;
-  transform-style: preserve-3d;
 }
 
 .content-visible {
