@@ -1,18 +1,18 @@
-use yew::{function_component, html, use_state, Callback, Html};
-
 use crate::components::english::English;
 use crate::components::korean::Korean;
 use crate::components::photo::Photo;
+use crate::components::russian::Russian;
 use crate::components::social::Social;
+use yew::{function_component, html, use_state, Callback, Html};
 
 #[function_component(Card)]
 pub fn card() -> Html {
-    let is_korean = use_state(|| true);
+    let current_language = use_state(|| "en".to_string());
 
-    let toggle_language = {
-        let is_korean = is_korean.clone();
-        Callback::from(move |_| {
-            is_korean.set(!*is_korean);
+    let set_language = {
+        let current_language = current_language.clone();
+        Callback::from(move |new_lang: String| {
+            current_language.set(new_lang);
         })
     };
 
@@ -23,26 +23,45 @@ pub fn card() -> Html {
     html! {
         <div class="body__container">
             <div class="body__profile">
-                <Photo korean={*is_korean} />
+                <Photo />
                 <div class="body__profile__button-area">
-                    if *is_korean {
+                    if *current_language == "kr" {
                         <Korean />
-                    } else {
+                    } else if *current_language == "en" {
                         <English />
+                    } else if *current_language == "ru" {
+                        <Russian />
                     }
                     <Social />
                     <button class="body__profile__button github" onclick={Callback::from(move |_| { web_sys::window().unwrap().location().set_href(github_url).unwrap(); })}>
-                        { if *is_korean { "GitHub에서 포트폴리오 보기" } else { "View portfolio on GitHub" } }
+                        { if *current_language == "kr" { "GitHub에서 포트폴리오 보기" } else if *current_language == "ru" { "Профиль на GitHub" } else { "View portfolio on GitHub" } }
                     </button>
                     <button class="body__profile__button cv" onclick={Callback::from(move |_| { web_sys::window().unwrap().location().set_href(resume_url).unwrap(); })}>
-                        { if *is_korean { "이력서 다운로드" } else { "Download CV" } }
+                        { if *current_language == "kr" { "이력서 다운로드" } else if *current_language == "ru" { "Скачать резюме" } else { "Download CV" } }
                     </button>
                 </div>
                 <div class="body__profile__translate">
-                    <button onclick={toggle_language}>
-                        { if *is_korean { "번역하기 (EN)" } else { "Translate (KR)" } }
-                    </button>
+                    <a onclick={Callback::from({
+                        let set_language = set_language.clone();
+                        move |_| set_language.emit("kr".to_string())
+                    })}>
+                        <img class="flag" src="../images/flags/kr.svg"/>
+                    </a>
+                    <a onclick={Callback::from({
+                        let set_language = set_language.clone();
+                        move |_| set_language.emit("en".to_string())
+                    })}>
+                        <img class="flag" src="../images/flags/us.svg"/>
+                    </a>
+                    <a onclick={Callback::from({
+                        let set_language = set_language.clone();
+                        move |_| set_language.emit("ru".to_string())
+                    })}>
+                        <img class="flag" src="../images/flags/ru.svg"/>
+                    </a>
                 </div>
+
+                <p class="created">{"Created on "} <i class="fa-brands fa-rust"></i></p>
             </div>
         </div>
     }
