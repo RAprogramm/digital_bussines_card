@@ -1,0 +1,44 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        override: true
+
+    - name: Install Trunk
+      run: cargo install trunk
+
+    - name: Build with Trunk
+      run: trunk build --release -M
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
+
+    - name: Authenticate to Firebase
+      run: firebase login:ci --token ${{ secrets.FIREBASE_TOKEN }}
+
+    - name: Deploy to Firebase Hosting
+      run: firebase deploy --only hosting:raprogramm
