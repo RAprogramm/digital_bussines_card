@@ -23,6 +23,9 @@ jobs:
         profile: minimal
         override: true
 
+    - name: Add WebAssembly target
+      run: rustup target add wasm32-unknown-unknown
+
     - name: Install Trunk
       run: cargo install trunk
 
