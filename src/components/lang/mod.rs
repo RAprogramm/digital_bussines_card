@@ -1,4 +1,12 @@
 pub mod english;
+pub mod korean;
 pub mod russian;
 pub mod vietnam;
-pub mod korean;
+
+#[derive(Clone, PartialEq)]
+pub enum Language {
+    English,
+    Korean,
+    Russian,
+    Vietnamese,
+}

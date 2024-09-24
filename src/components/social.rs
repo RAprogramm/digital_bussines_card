@@ -1,4 +1,4 @@
-use web_sys::window;
+use web_sys::{console, window};
 use yew::{function_component, html, Callback, Html};
 
 #[function_component(Social)]
@@ -7,7 +7,11 @@ pub fn social() -> Html {
         let url = url.to_string();
         Callback::from(move |_| {
             if let Some(window) = window() {
-                window.location().set_href(&url).unwrap();
+                if let Err(err) = window.location().set_href(&url) {
+                    console::error_1(&format!("Failed to navigate to {}: {:?}", url, err).into());
+                }
+            } else {
+                console::error_1(&"Failed to get window object".into());
             }
         })
     };
