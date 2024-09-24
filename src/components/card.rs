@@ -6,7 +6,9 @@ use web_sys::{
 use yew::{function_component, html, use_state, Callback, Classes, Html};
 
 use crate::components::{
-    english::English, korean::Korean, photo::Photo, russian::Russian, social::Social,
+    lang::{english::English, korean::Korean, russian::Russian, vietnam::Vietnamese},
+    photo::Photo,
+    social::Social,
 };
 
 #[derive(Clone, PartialEq)]
@@ -14,6 +16,7 @@ enum Language {
     English,
     Korean,
     Russian,
+    Vietnamese,
 }
 
 #[function_component(Card)]
@@ -73,17 +76,18 @@ pub fn card() -> Html {
     let resume_url =
         "https://drive.google.com/file/d/1--CHUjt7L6gjNzVYx_3y_IL4iWWUPGum/view?usp=drive_link";
 
-    // Тексты кнопок меняются в зависимости от языка
     let github_text = match &*current_language {
         Language::Korean => "GitHub에서 포트폴리오 보기",
         Language::Russian => "Профиль на GitHub",
         Language::English => "View portfolio on GitHub",
+        Language::Vietnamese => "Xem hồ sơ trên GitHub",
     };
 
     let resume_text = match &*current_language {
         Language::Korean => "이력서 다운로드",
         Language::Russian => "Скачать резюме",
         Language::English => "Download CV",
+        Language::Vietnamese => "Tải xuống CV",
     };
 
     let container_classes = if *is_rotating {
@@ -110,6 +114,7 @@ pub fn card() -> Html {
                                 Language::Korean => html! { <Korean /> },
                                 Language::English => html! { <English /> },
                                 Language::Russian => html! { <Russian /> },
+                                Language::Vietnamese => html! { <Vietnamese /> },
                             }}
                         </div>
                         <Social />
@@ -139,6 +144,12 @@ pub fn card() -> Html {
                         move |_| set_language.emit(Language::Russian)
                     })}>
                         <img class="flag" src="../images/flags/ru.svg"/>
+                    </a>
+                    <a onclick={Callback::from({
+                        let set_language = set_language.clone();
+                        move |_| set_language.emit(Language::Vietnamese)
+                    })}>
+                        <img class="flag" src="../images/flags/vn.svg"/>
                     </a>
                 </div>
                 <p class="created">{"Created on "} <i class="fa-brands fa-rust"></i></p>

@@ -1,4 +1,5 @@
-var cacheName = 'rozanov-dev-v1';
+// Динамическое имя кэша с версией
+const cacheName = `rozanov-dev-v${new Date().getTime()}`;
 
 // Динамическое кэширование при первой загрузке ресурсов
 self.addEventListener('install', function(event) {
@@ -17,18 +18,19 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).then(function(response) {
-      // Если ресурс уже есть в кэше, возвращаем его
       if (response) {
-        return response;
+        // Запускаем сетевой запрос, чтобы обновить кэш в фоне
+        fetch(event.request).then(function(networkResponse) {
+          caches.open(cacheName).then(function(cache) {
+            cache.put(event.request, networkResponse.clone());
+          });
+        });
+        return response; // возвращаем кэшированный ресурс
       }
 
-      // Если ресурса нет в кэше, загружаем его и кэшируем
       return fetch(event.request).then(function(networkResponse) {
         return caches.open(cacheName).then(function(cache) {
-          // Исключаем из кэширования файлы с запросами через метод POST
-          if (event.request.method === 'GET') {
-            cache.put(event.request, networkResponse.clone());
-          }
+          cache.put(event.request, networkResponse.clone());
           return networkResponse;
         });
       });
@@ -38,13 +40,11 @@ self.addEventListener('fetch', function(event) {
 
 /* Очистка старого кэша при обновлении Service Worker */
 self.addEventListener('activate', function(event) {
-  var cacheWhitelist = [cacheName];
-
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cache) {
-          if (cacheWhitelist.indexOf(cache) === -1) {
+          if (cache !== cacheName) {
             return caches.delete(cache);
           }
         })

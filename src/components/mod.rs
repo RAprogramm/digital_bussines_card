@@ -1,6 +1,4 @@
 pub mod card;
 pub mod social;
-pub mod english;
+pub mod lang;
 pub mod photo;
-pub mod korean;
-pub mod russian;
