@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+  <link data-trunk rel="copy-file" href="manifest.json">
+  <!-- <link data-trunk rel="copy-file" href="icon-256.png"> -->
+  <link data-trunk rel="copy-file" href="service_worker.js">
+  <link rel="manifest" href="./manifest.json">
+
+  <script>
+    // register ServiceWorker
+    window.onload = () => {
+      'use strict';
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('./service_worker.js');
+      }
+    }
+  </script>
+
+  <title>Rozanov Andrei • Developer</title>
+
+  <link data-trunk rel="rust" />
+
+  <link data-trunk rel="sass" href="styles/common.scss" />
+
+  <link data-trunk rel="css" href="styles/card.css" />
+  <link data-trunk rel="css" href="styles/photo.css" />
+  <link data-trunk rel="css" href="styles/social.css" />
+  <link data-trunk rel="css" href="styles/russian.css" />
+  <link data-trunk rel="css" href="styles/english.css" />
+  <link data-trunk rel="css" href="styles/korean.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link data-trunk rel="copy-dir" href="/assets/images" />
+  <link data-trunk rel="copy-dir" href="/assets/fonts" />
+</head>
+
+<body></body>
+
+</html>

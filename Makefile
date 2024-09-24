@@ -1,9 +1,4 @@
-dev:
-	yarn serve
+.PHONY: release
 
-build:
-	yarn build
-
-yarn prod:
-	yarn build
-	firebase deploy --only hosting:raprogramm
+release:
+	trunk build --release -M && firebase deploy --only hosting:raprogramm

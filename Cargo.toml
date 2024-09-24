@@ -1,0 +1,15 @@
+[package]
+name = "business-card"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+yew = { version = "0.21.0", features = ["csr"] } 
+
+web-sys = "0.3.70"
+
+log = "0.4.20"
+wasm-logger = "0.2.0"
+
+[profile.release]
+opt-level = 'z' # or 'z' (check size)
