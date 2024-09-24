@@ -1,10 +1,11 @@
-use yew::use_state;
+use std::rc::Rc;
+
+use yew::{use_state, Hook, UseStateHandle};
 
 use crate::components::lang::Language;
 
-#[derive(Clone)]
 pub struct State {
-    pub language: Language,
+    pub language: Rc<Language>,
     pub is_rotating: bool,
     pub is_content_visible: bool,
 }
@@ -12,13 +13,13 @@ pub struct State {
 impl Default for State {
     fn default() -> Self {
         Self {
-            language: Language::English,
+            language: Language::English.into(),
             is_rotating: false,
             is_content_visible: true,
         }
     }
 }
 
-pub fn use_card_state() -> impl yew::Hook<Output = yew::UseStateHandle<State>> {
+pub fn use_card_state() -> impl Hook<Output = UseStateHandle<State>> {
     use_state(State::default)
 }

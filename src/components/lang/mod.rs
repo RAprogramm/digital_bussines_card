@@ -3,7 +3,7 @@ pub mod korean;
 pub mod russian;
 pub mod vietnam;
 
-#[derive(Clone, PartialEq)]
+// #[derive(Clone, PartialEq)]
 pub enum Language {
     English,
     Korean,
