@@ -1,13 +1,13 @@
 use std::sync::{Arc, OnceLock};
 
-use super::card::SwipeDirection;
+use crate::touch_handler::SwipeDirection;
 
 pub mod english;
 pub mod korean;
 pub mod russian;
 pub mod vietnam;
 
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum Language {
     Korean,
     English,

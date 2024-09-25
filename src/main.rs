@@ -6,6 +6,7 @@ use app::App;
 mod app;
 mod components;
 mod state;
+mod touch_handler;
 
 fn main() {
     init(Config::default());

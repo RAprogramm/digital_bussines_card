@@ -107,6 +107,24 @@
   opacity: 1;
 }
 
+.animating {
+  animation: rotate-flag 0.5s ease-in-out;
+}
+
+.rotating {
+  animation: rotate-flag 0.5s ease-in-out;
+}
+
+@keyframes rotate-flag {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
 .active-flag {
   opacity: 1;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);

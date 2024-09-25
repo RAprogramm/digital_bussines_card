@@ -1,26 +1,18 @@
 use std::sync::Arc;
 
-use web_sys::{console, HtmlElement, TouchEvent};
 use yew::{function_component, html, use_state, Callback, Classes, Html, NodeRef};
 
 use crate::{
     components::{
         buttons::{render_github_button, render_resume_button},
         flags::render_flags,
-        lang::{
-            english::English, get_next_language, korean::Korean, russian::Russian,
-            vietnam::Vietnamese, Language,
-        },
+        lang::{english::English, korean::Korean, russian::Russian, vietnam::Vietnamese, Language},
         photo::Photo,
         social::Social,
     },
     state::{use_card_state, State},
+    touch_handler,
 };
-
-pub enum SwipeDirection {
-    Left,
-    Right,
-}
 
 #[function_component(Card)]
 pub fn card() -> Html {
@@ -28,7 +20,7 @@ pub fn card() -> Html {
     let touch_start_x = use_state(|| 0.0);
     let touch_current_x = use_state(|| 0.0);
     let is_swiping = use_state(|| false);
-    let swipe_threshold = 50.0;
+    let swipe_threshold = 250.0;
     let card_ref = NodeRef::default();
 
     let set_language = {
@@ -42,88 +34,21 @@ pub fn card() -> Html {
         })
     };
 
-    let on_touch_start = {
-        let touch_start_x = touch_start_x.clone();
-        let is_swiping = is_swiping.clone();
-        Callback::from(move |event: TouchEvent| {
-            if let Some(touch) = event.touches().get(0) {
-                touch_start_x.set(touch.client_x() as f64);
-                is_swiping.set(false);
-            }
-        })
-    };
-
-    let on_touch_move = {
-        let touch_start_x = touch_start_x.clone();
-        let touch_current_x = touch_current_x.clone();
-        let is_swiping = is_swiping.clone();
-        let card_ref = card_ref.clone();
-        Callback::from(move |event: TouchEvent| {
-            if let Some(touch) = event.changed_touches().get(0) {
-                let current_x = touch.client_x() as f64;
-                touch_current_x.set(current_x);
-
-                let delta_x = current_x - *touch_start_x;
-                let rotation_angle = delta_x / 3.0;
-
-                if delta_x.abs() > 10.0 {
-                    is_swiping.set(true);
-                }
-
-                if let Some(card) = card_ref.cast::<HtmlElement>() {
-                    if let Err(err) = card
-                        .style()
-                        .set_property("transform", &format!("rotateY({}deg)", rotation_angle))
-                    {
-                        console::error_1(
-                            &format!("Failed to set transform property: {:?}", err).into(),
-                        );
-                    }
-                }
-            }
-        })
-    };
-
-    let on_touch_end = {
-        let touch_start_x = touch_start_x.clone();
-        let touch_current_x = touch_current_x.clone();
-        let is_swiping = is_swiping.clone();
-        let state = state.clone();
-        let card_ref = card_ref.clone();
-        Callback::from(move |_| {
-            let delta_x = *touch_current_x - *touch_start_x;
-
-            if *is_swiping {
-                if delta_x.abs() > swipe_threshold {
-                    let new_language = if delta_x > 0.0 {
-                        get_next_language(&state.language, SwipeDirection::Right)
-                    } else {
-                        get_next_language(&state.language, SwipeDirection::Left)
-                    };
-
-                    state.set(State {
-                        language: Arc::clone(&new_language),
-                        is_rotating: false,
-                        is_content_visible: true,
-                    });
-
-                    if let Some(card) = card_ref.cast::<HtmlElement>() {
-                        if let Err(err) = card.style().set_property("transform", "rotateY(0deg)") {
-                            console::error_1(
-                                &format!("Failed to reset transform property: {:?}", err).into(),
-                            );
-                        }
-                    }
-                } else if let Some(card) = card_ref.cast::<HtmlElement>() {
-                    if let Err(err) = card.style().set_property("transform", "rotateY(0deg)") {
-                        console::error_1(
-                            &format!("Failed to reset transform property: {:?}", err).into(),
-                        );
-                    }
-                }
-            }
-        })
-    };
+    let on_touch_start = touch_handler::on_touch_start(touch_start_x.clone(), is_swiping.clone());
+    let on_touch_move = touch_handler::on_touch_move(
+        touch_start_x.clone(),
+        touch_current_x.clone(),
+        is_swiping.clone(),
+        card_ref.clone(),
+    );
+    let on_touch_end = touch_handler::on_touch_end(
+        touch_start_x.clone(),
+        touch_current_x.clone(),
+        is_swiping.clone(),
+        state.clone(),
+        card_ref.clone(),
+        swipe_threshold,
+    );
 
     let github_url = "https://www.github.com/RAprogramm";
     let resume_url =
@@ -178,7 +103,7 @@ pub fn card() -> Html {
                     </div>
                 </div>
                 <div class="body__profile__translate">
-                    { render_flags(&state, set_language.clone()) }
+                    { render_flags(&state, set_language.clone(), card_ref.clone()) }
                 </div>
                 <p class="created">{"Created on "}<i class="fa-brands fa-rust"></i>{" by RAprogramm"}</p>
             </div>
