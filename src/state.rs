@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use yew::{use_state, Hook, UseStateHandle};
 
-use crate::components::lang::Language;
+use crate::components::lang::{language_handle, Language};
 
 pub struct State {
     pub language: Arc<Language>,
@@ -13,7 +13,7 @@ pub struct State {
 impl Default for State {
     fn default() -> Self {
         Self {
-            language: Arc::new(Language::English),
+            language: language_handle(Language::English),
             is_rotating: false,
             is_content_visible: true,
         }
