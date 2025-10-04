@@ -4,7 +4,7 @@ use wasm_bindgen::{prelude::Closure, JsCast};
 use web_sys::{console, window, HtmlElement, MouseEvent};
 use yew::{html, Callback, Event, Html, NodeRef, UseStateHandle};
 
-use super::lang::Language;
+use super::lang::{language_handle, Language};
 use crate::state::State;
 
 fn flag_button(
@@ -14,12 +14,12 @@ fn flag_button(
     card_ref: NodeRef,
     classes: String,
 ) -> Html {
-    let flag_lang_clone = Arc::clone(&flag_lang);
+    let flag_lang_clone = flag_lang;
     let animation_in_progress = Rc::new(RefCell::new(false));
 
     let onclick = Callback::from({
         let card_ref = card_ref.clone();
-        let flag_lang_clone = flag_lang_clone.clone();
+        let flag_lang_clone = Arc::clone(&flag_lang_clone);
         let animation_in_progress = animation_in_progress.clone();
         move |_: MouseEvent| {
             if let Some(target) = card_ref.cast::<HtmlElement>() {
@@ -42,7 +42,7 @@ fn flag_button(
                 let animation_in_progress_clone = animation_in_progress.clone();
                 let handle = Closure::wrap(Box::new(move || {
                     if *animation_in_progress_clone.borrow() {
-                        set_language.emit(flag_lang_clone.clone());
+                        set_language.emit(Arc::clone(&flag_lang_clone));
                     }
                 }) as Box<dyn FnMut()>);
 
@@ -113,18 +113,23 @@ pub fn render_flags(
     set_language: Callback<Arc<Language>>,
     card_ref: NodeRef,
 ) -> Html {
+    let korean = language_handle(Language::Korean);
+    let english = language_handle(Language::English);
+    let russian = language_handle(Language::Russian);
+    let vietnamese = language_handle(Language::Vietnamese);
+
     html! {
         <>
-            { flag_button(Arc::new(Language::Korean), "../images/flags/kr.svg".to_string(), set_language.clone(), card_ref.clone(), get_flag_class(&state.language, &Language::Korean)) }
-            { flag_button(Arc::new(Language::English), "../images/flags/us.svg".to_string(), set_language.clone(), card_ref.clone(), get_flag_class(&state.language, &Language::English)) }
-            { flag_button(Arc::new(Language::Russian), "../images/flags/ru.svg".to_string(), set_language.clone(), card_ref.clone(), get_flag_class(&state.language, &Language::Russian)) }
-            { flag_button(Arc::new(Language::Vietnamese), "../images/flags/vn.svg".to_string(), set_language.clone(), card_ref.clone(), get_flag_class(&state.language, &Language::Vietnamese)) }
+            { flag_button(Arc::clone(&korean), "../images/flags/kr.svg".to_string(), set_language.clone(), card_ref.clone(), get_flag_class(&state.language, Language::Korean)) }
+            { flag_button(Arc::clone(&english), "../images/flags/us.svg".to_string(), set_language.clone(), card_ref.clone(), get_flag_class(&state.language, Language::English)) }
+            { flag_button(Arc::clone(&russian), "../images/flags/ru.svg".to_string(), set_language.clone(), card_ref.clone(), get_flag_class(&state.language, Language::Russian)) }
+            { flag_button(Arc::clone(&vietnamese), "../images/flags/vn.svg".to_string(), set_language.clone(), card_ref.clone(), get_flag_class(&state.language, Language::Vietnamese)) }
         </>
     }
 }
 
-fn get_flag_class(current_language: &Arc<Language>, language: &Language) -> String {
-    if **current_language == *language {
+fn get_flag_class(current_language: &Arc<Language>, language: Language) -> String {
+    if **current_language == language {
         "active-flag".to_string()
     } else {
         "".to_string()
